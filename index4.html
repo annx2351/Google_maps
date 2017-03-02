@@ -39,6 +39,7 @@
 
             var marker = new google.maps.Marker({
                 position: myLatLng,
+                animation: google.maps.Animation.BOUNCE,
                 map: map,
                 title: 'Hello World!',
             });
@@ -55,9 +56,10 @@
 
             var marker = new google.maps.Marker({
                 position: Sydney,
+                animation: google.maps.Animation.DROP,
                 map: map,
                 title: 'Hello World!',
-                icon: "https://image.flaticon.com/icons/png/512/33/33622.png"
+                icon: "https://cdn2.iconfinder.com/data/icons/simple-microphone-icon/512/Location_Icon-128.png"
             });
 
 
@@ -69,9 +71,12 @@
 
             var marker = new google.maps.Marker({
                 position: Melbourne,
+                animation: google.maps.Animation.DROP,
                 map: map,
                 title: 'Hello World!'
             });
+
+
 
             var Brisbane = {
                 lat: -27.4698454,
@@ -81,9 +86,12 @@
 
             var marker = new google.maps.Marker({
                 position: Brisbane,
+                animation: google.maps.Animation.DROP,
                 map: map,
                 title: 'Hello World!'
             });
+
+
 
 
         }
