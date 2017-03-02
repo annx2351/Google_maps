@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+        /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+
+        #map {
+            height: 100%;
+        }
+        /* Optional: Makes the sample page fill the window. */
+
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="map"></div>
+
+    <div id="etelement">
+        <p>Hej</p>
+    </div>
+    <script>
+        function initMap() {
+            var myLatLng = {
+                lat: -25.363,
+                lng: 131.044
+            };
+
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 4,
+                center: myLatLng
+            });
+
+            var marker = new google.maps.Marker({
+                position: myLatLng,
+                animation: google.maps.Animation.BOUNCE,
+                map: map,
+                title: 'Hello World!',
+            });
+
+            var elementet = document.querySelector("#etelement");
+
+            //infowindow
+            var infowindow = new google.maps.InfoWindow({
+                //nedenstående content overskrives af detContent i linje 60
+                //content: "<h2>Australien<h2>",
+            });
+
+            marker.addListener('click', function () {
+                infowindow.setContent(elementet);
+                infowindow.open(map, marker);
+            });
+
+            //infowindowslut
+
+            var Sydney = {
+                lat: -33.8479715,
+                lng: 150.6510774
+            };
+
+
+            var marker_syd = new google.maps.Marker({
+                position: Sydney,
+                animation: google.maps.Animation.DROP,
+                map: map,
+                title: 'Hello World!',
+                icon: "https://cdn2.iconfinder.com/data/icons/simple-microphone-icon/512/Location_Icon-128.png"
+            });
+
+            marker_syd.addListener('click', function () {
+                map.setZoom(8);
+                map.setCenter(marker_syd.getPosition());
+            });
+
+
+            var Melbourne = {
+                lat: -37.8269274,
+                lng: 144.9359171
+            };
+
+
+            var marker_melb = new google.maps.Marker({
+                position: Melbourne,
+                animation: google.maps.Animation.DROP,
+                map: map,
+                title: 'Hello World!'
+            });
+
+            marker_melb.addListener('click', function () {
+                map.setZoom(8);
+                map.setCenter(marker_melb.getPosition());
+            });
+
+
+            var Brisbane = {
+                lat: -27.4698454,
+                lng: 153.014241
+            };
+
+
+            var marker_bris = new google.maps.Marker({
+                position: Brisbane,
+                animation: google.maps.Animation.DROP,
+                map: map,
+                title: 'Hello World!'
+            });
+
+
+            marker_bris.addListener('click', function () {
+                map.setZoom(8);
+                map.setCenter(marker_bris.getPosition());
+            });
+
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAFAvtXGpTSi6Lv4As9fKZswzFjQVE6TyM&callback=initMap" async defer></script>
+</body>
+
+</html>
