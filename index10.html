@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+        /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+
+        #map {
+            height: 100%;
+        }
+        /* Optional: Makes the sample page fill the window. */
+
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <template id="etelement">
+        <p>Hej</p>
+    </template>
+
+    <div id="map"></div>
+
+
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script>
+        window.addEventListener("load", start);
+
+        function start() {
+            console.log("start programmet");
+            $.getJSON("data.json", visSteder);
+        }
+
+        function visSteder(stederFraJSON) {
+            console.log("visSteder");
+            console.log(stederFraJSON);
+            stederFraJSON.forEach(lavSted);
+        }
+
+        var map;
+        var infowindow;
+        var syd;
+        var melb;
+
+        function initMap() {
+            syd = new google.maps.LatLng(-33.8479715, 150.6510774);
+            map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 4,
+                center: syd
+            });
+
+
+
+            function lavSted(sted) {
+                console.log("lav sted" + sted);
+                var ll = new google.maps.LatLng(sted.lat, sted.lng);
+                var m = new google.maps.Marker({
+                    posiiton: ll,
+                    map: map,
+                    animation: google.maps.Animation.DROP
+                });
+
+                var w = new google.maps.InfoWindow({
+                    maxWidth: 100
+                })
+                m.addListener("click", visInfo);
+
+                function visInfo() {
+                    var tempInfo =
+                        document.querySelector("#etelement").content.cloneNode(true);
+                    tempInfo.querySelector("p").innerHTML = sted.txt;
+
+                    w.setContent(tempInfo);
+                    w.open(map, m);
+                }
+
+//                var marker = new google.maps.Marker({ // position: myLatLng, // animation: google.maps.Animation.BOUNCE, // map: map, // title: 'Hello World!', // });
+
+                //infowindow
+                var infowindow = new google.maps.InfoWindow({
+                    //nedenstående content overskrives af detContent i linje 60
+                    //content: "<h2>Australien<h2>",
+                });
+
+                marker.addListener('click', function () {
+                    infowindow.setContent(klon);
+                    infowindow.open(map, marker);
+                });
+
+                //infowindowslut
+
+                var Sydney = {
+                    lat: -33.8479715,
+                    lng: 150.6510774
+                };
+
+
+                var marker_syd = new google.maps.Marker({
+                    position: Sydney,
+                    animation: google.maps.Animation.DROP,
+                    map: map,
+                    title: 'Hello World!',
+                    icon: "https://cdn2.iconfinder.com/data/icons/simple-microphone-icon/512/Location_Icon-128.png"
+                });
+
+
+                var Melbourne = {
+                    lat: -37.8269274,
+                    lng: 144.9359171
+                };
+
+
+                var marker_melb = new google.maps.Marker({
+                    position: Melbourne,
+                    animation: google.maps.Animation.DROP,
+                    map: map,
+                    title: 'Hello World!'
+                });
+
+            }
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAFAvtXGpTSi6Lv4As9fKZswzFjQVE6TyM&callback=initMap" async defer></script>
+
+</body>
+
+</html>

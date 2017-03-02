@@ -1,0 +1,15 @@
+[
+    {
+        "id": "Sydney",
+        "lat": "-33.8479715",
+        "lng": "150.6510774",
+        "navn": "Sydney",
+        "beskrivelse": "By i Australien"
+  },
+    {
+        "id": "Melbourne",
+        "lat": "-37.8269274",
+        "lng": "144.9359171",
+        "navn": "Melbourne",
+        "beskrivelse": "By i Australien"
+  }]
